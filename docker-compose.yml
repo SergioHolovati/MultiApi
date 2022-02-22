@@ -1,0 +1,25 @@
+version: '3.9'
+
+services:    
+    multidb:
+      image: mysql:latest
+      command: --innodb-use-native-aio=0
+      container_name: multidb
+      restart: always
+      tty: true
+      ports:
+        - "3307:3306"
+      expose:
+        - "3307"
+      volumes: 
+        - ./mysql:/var/lib/mysql
+      environment:
+        - MYSQL_DATABASE=multidb
+        - MYSQL_ROOT_PASSWORD=root
+        - MYSQL_USER=sergio
+
+
+networks:
+    multinetwork:
+        driver: bridge
+    
